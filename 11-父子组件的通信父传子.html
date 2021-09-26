@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 父组件模板 -->
+  <div id="app">
+    <cpn :cmovies=movies></cpn>
+  </div>
+  <!-- 子组件模板 -->
+  <template id="cpn">
+    <div>
+      <ul>
+        <li v-for='item in cmovies'>{{item}}</li>
+      </ul>
+    </div>
+  </template>
+
+  <script src="js/vue.js"></script>
+  <script>
+    //子组件
+    const cpn = {
+      template: '#cpn',
+      // 父传子用props
+      props:{
+        cmovies: {
+          type: Array
+        }
+      }
+    }
+    // 父组件
+    const app = new Vue({
+      el: '#app',
+      data: {
+        movies: ['a', 'b', 'c', 'd']
+      },
+      // 注册局部组件
+      components: {
+        cpn
+      }
+    })
+  </script>
+</body>
+</html>

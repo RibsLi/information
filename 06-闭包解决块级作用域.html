@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button>4</button>
+  <button>5</button>
+
+  <script>
+    //es5中if、for都没块级作用域，函数具有块级作用域
+    var buts = document.getElementsByTagName('button');
+    // for (var i = 0; i < buts.length; i++){
+    //   buts[i].addEventListener('click', function(){
+    //     console.log('第' + i + '个按钮被点击了')
+    //   })
+    // }
+
+    //闭包解决作用域
+    // for(var i = 0; i < buts.length; i++){
+    //   (function(i){
+    //     buts[i].addEventListener('click', function(){
+    //       console.log('第' + i + '个按钮被点击了')
+    //     })
+    //   })(i)
+    // }
+
+    //es6写法
+      for( let i = 0; i < buts.length; i++){
+        buts[i].addEventListener('click', function(){
+          console.log('第' + i + '个按钮被点击了')
+        })
+      }
+  </script>
+  
+</body>
+</html>

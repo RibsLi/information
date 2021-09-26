@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+<script>
+  //一般有异步操作时使用promise对这个异步操作进行封装
+  // Promise()包含一个参数函数，这个函数又包含两个参数，这两个参数本身也是函数
+  new Promise((resolve, reject) => {
+    //第一次网络请求的代码
+    setTimeout(() => {
+      // 网络请求成功执行resolve(),进而继续执行then()。失败时执行reject(),后继续执行catch()
+      resolve()
+      // reject()
+    },1000)
+  }).then(() => {
+    //第一次拿到结果的处理代码
+    console.log("Hello world");
+    console.log("Hello world");
+    console.log("Hello world");
+
+    return new Promise((resolve, rejiect) => {
+      //第二次网络请求的代码
+      setTimeout(() => {
+        resolve()
+      },1000)
+    })
+  }).then(() => {
+    // 第二次处理的代码
+    console.log("Hello Vuejs");
+    console.log("Hello Vuejs");
+    console.log("Hello Vuejs");
+  }).catch(() => {
+    console.log("err");
+  })
+  
+
+
+  new Promise((resolve, rejiect) => {
+    setTimeout(() => {
+      resolve("Hello")
+    }, 1000);
+  }).then(data => {
+    console.log(data);
+  })
+
+  //promise第二种写法
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // resolve("hello promise")
+      reject("hello promise")
+    }, 1000);
+  }).then((data) => {
+    console.log(data);
+  }, err => {
+    console.log(err);
+  })
+
+  //promise的链式调用
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve()
+    }, 1000);
+  }).then(() => {
+    console.log();
+    //当只有resolv时reject可以省略
+    return new Promise((resolve) => {
+      resolve()
+    })
+  }).then(() => {
+    console.log();
+    //promise第三种写法
+    return Promise.resolve()
+  }).then(() => {
+    console.log();
+    //promise第四种写法 直接省略掉promise.resolve,直接写以前resolve里面的运算
+    return a + 1
+  })
+
+  //promise的all方法，多个网络请求同时满足时执行
+  Promise.all([
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('result1')
+      },1000)
+    }),
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('result2')
+      },1000)
+    })
+  ]).then((results) => {//此时results是一个数组
+    console.log(results);
+  })
+</script>
+</body>
+</html>
